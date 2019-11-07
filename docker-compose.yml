@@ -1,0 +1,24 @@
+# Aidyn Jones
+version: "3.7"
+services:
+  flaskapp:
+    image: jonear2/flaskapp
+    deploy:
+      replicas: 3
+    networks:
+      - app
+  nginx:
+    image: jonear2/nginx
+    deploy:
+      replicas: 3
+    ports:
+      - 8080:80
+    networks:
+      - app
+  redis:
+    image: "redis:latest"
+    networks:
+      - app
+networks:
+  app:
+    driver: overlay
